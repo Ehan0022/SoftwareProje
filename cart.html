@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ShopSphere | Sepetim</title>
+
+  <link rel="stylesheet" href="cart.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a href="landingPage.html" class="logo" aria-label="ShopSphere ana sayfa">
+        <span class="logo-mark"></span>
+      </a>
+
+      <form class="search-bar">
+        <span class="search-icon">⌕</span>
+        <input
+          type="text"
+          placeholder="ShopSphere'de ara"
+          aria-label="Ürün ara"
+        />
+      </form>
+
+      <div class="header-actions">
+        <button class="address-box" type="button">
+          <span class="action-icon">⌖</span>
+          <span>
+            <small>TESLİMAT ADRESİ</small>
+            <strong>Bursa/Nilüfer</strong>
+          </span>
+        </button>
+
+        <span class="header-divider"></span>
+
+        <a href="cart.html" class="cart-link" aria-label="Sepetim">
+          <span class="cart-icon">🛒</span>
+        </a>
+
+        <a href="login.html" class="account-box">
+          <span class="account-icon">♙</span>
+          <span>
+            <small>HESABIM</small>
+            <strong>Üye Ol&nbsp;&nbsp;Giriş Yap</strong>
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="cart-page">
+
+    <section class="cart-content">
+
+      <section class="cart-box">
+        <div class="cart-title-row">
+          <h1>Sepetim <span id="cartItemCount">(0)</span></h1>
+        </div>
+
+        <div class="cart-alert">
+          🎉 Sepetteki ürünlerde fırsatlar ve indirimler seni bekliyor.
+        </div>
+
+        <div class="cart-select-row">
+          <label>
+            <input id="selectAll" type="checkbox" checked />
+            Tümünü Seç
+          </label>
+
+          <button id="deleteSelectedButton" type="button">Seçilenleri Sil</button>
+        </div>
+
+        <div id="cartItems" class="cart-items"></div>
+
+        <div id="emptyCart" class="empty-cart hidden">
+          <div class="empty-icon">🛒</div>
+          <h2>Sepetin boş</h2>
+          <p>Ürünleri keşfetmeye devam ederek sepetine ürün ekleyebilirsin.</p>
+          <a href="landingPage.html">Alışverişe Başla</a>
+        </div>
+      </section>
+
+    </section>
+
+    <aside class="cart-summary">
+      <div class="summary-card">
+        <h2>Sipariş Özeti</h2>
+
+        <div class="summary-row">
+          <span id="summaryProductLabel">Ürün Tutarı</span>
+          <strong id="summarySubtotal">0 TL</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Kargo Tutarı</span>
+          <strong id="summaryShipping">0 TL</strong>
+        </div>
+
+        <div class="summary-row discount">
+          <span>İndirim Tutarı</span>
+          <strong id="summaryDiscount">0 TL</strong>
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <div class="summary-total">
+          <span>Toplam Tutar</span>
+          <strong id="summaryTotal">0 TL</strong>
+        </div>
+
+        <button id="checkoutButton" class="checkout-button" type="button">
+          Ödemeye Geç
+        </button>
+
+        <p id="checkoutMessage" class="checkout-message"></p>
+      </div>
+    </aside>
+
+  </main>
+
+  <script src="cart.js"></script>
+</body>
+</html>

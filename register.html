@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopSphere | Üye Ol</title>
+
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    <section class="auth-card register-card">
+
+      <a href="landingPage.html" class="auth-logo" aria-label="ShopSphere ana sayfa">
+        <span>ShopSphere</span>
+        <i></i>
+      </a>
+
+      <h1 class="auth-title">Merhaba!</h1>
+      <p class="auth-subtitle">ShopSphere hesabını oluşturarak alışverişe başlayabilirsin.</p>
+
+      <div class="auth-tabs">
+        <a href="login.html" class="auth-tab">Giriş Yap</a>
+        <a href="register.html" class="auth-tab active">Üye Ol</a>
+      </div>
+
+      <form id="registerForm" class="auth-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">Ad</label>
+            <input 
+              id="firstName" 
+              name="firstName" 
+              type="text" 
+              placeholder="Ad"
+              required
+            />
+            <small class="error-message"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Soyad</label>
+            <input 
+              id="lastName" 
+              name="lastName" 
+              type="text" 
+              placeholder="Soyad"
+              required
+            />
+            <small class="error-message"></small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="registerEmail">E-posta Adresi</label>
+          <input 
+            id="registerEmail" 
+            name="email" 
+            type="email" 
+            placeholder="E-posta adresi"
+            required
+          />
+          <small class="error-message"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="registerPassword">Şifre</label>
+          <div class="password-field">
+            <input 
+              id="registerPassword" 
+              name="password" 
+              type="password" 
+              placeholder="Şifre"
+              required
+            />
+            <button class="toggle-password" type="button" aria-label="Şifreyi göster">
+              👁
+            </button>
+          </div>
+
+          <ul class="password-rules">
+            <li>8-15 karakter</li>
+            <li>En az 1 rakam</li>
+            <li>En az 1 büyük ve 1 küçük harf</li>
+          </ul>
+
+          <small class="error-message"></small>
+        </div>
+
+        <div class="form-group">
+          <label>Kullanıcı Rolü</label>
+
+          <div class="role-options">
+            <label class="role-option">
+              <input type="radio" name="role" value="Customer" checked />
+              <span>Customer</span>
+            </label>
+
+            <label class="role-option">
+              <input type="radio" name="role" value="Seller" />
+              <span>Seller</span>
+            </label>
+
+            <label class="role-option">
+              <input type="radio" name="role" value="Admin" />
+              <span>Admin</span>
+            </label>
+          </div>
+
+          <small class="role-note">Her kullanıcı yalnızca bir role sahip olabilir.</small>
+        </div>
+
+        <label class="agreement-check">
+          <input id="agreement" name="agreement" type="checkbox" required />
+          <span>
+            <a href="#" class="text-link">Üyelik Sözleşmesi</a> şartlarını okudum ve kabul ediyorum.
+          </span>
+        </label>
+
+        <small id="agreementError" class="error-message agreement-error"></small>
+
+        <button class="auth-submit" type="submit">Üye Ol</button>
+
+        <p id="registerMessage" class="form-message"></p>
+      </form>
+
+      <div class="auth-help">
+        <strong>Yardıma mı ihtiyacın var?</strong>
+        <span>0850 333 0011 üzerinden Müşteri Hizmetleri’ne ulaşabilirsin.</span>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopSphere | Giriş Yap</title>
+
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    <section class="auth-card">
+
+      <a href="landingPage.html" class="auth-logo" aria-label="ShopSphere ana sayfa">
+        <span>ShopSphere</span>
+        <i></i>
+      </a>
+
+      <p class="auth-subtitle">Hesabına giriş yap ve alışverişe devam et.</p>
+
+      <div class="auth-tabs">
+        <a href="login.html" class="auth-tab active">Giriş Yap</a>
+        <a href="register.html" class="auth-tab">Üye Ol</a>
+      </div>
+
+      <form id="loginForm" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="loginEmail">E-posta Adresi</label>
+          <input 
+            id="loginEmail" 
+            name="email" 
+            type="email" 
+            placeholder="E-posta adresini gir"
+            required
+          />
+          <small class="error-message"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Şifre</label>
+          <div class="password-field">
+            <input 
+              id="loginPassword" 
+              name="password" 
+              type="password" 
+              placeholder="Şifreni gir"
+              required
+            />
+            <button class="toggle-password" type="button" aria-label="Şifreyi göster">
+              👁
+            </button>
+          </div>
+          <small class="error-message"></small>
+        </div>
+
+        <button class="auth-submit" type="submit">Giriş Yap</button>
+
+        <p id="loginMessage" class="form-message"></p>
+      </form>
+
+      <div class="auth-help">
+        <strong>Yardıma mı ihtiyacın var?</strong>
+        <span>0850 333 0011 üzerinden Müşteri Hizmetleri’ne ulaşabilirsin.</span>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>

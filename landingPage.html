@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopSphere</title>
+
+  <link rel="stylesheet" href="landingPage.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a href="landingPage.html" class="logo" aria-label="ShopSphere ana sayfa">
+        <span class="logo-mark"></span>
+      </a>
+
+      <form class="search-bar" id="landingSearchForm">
+        <span class="search-icon">⌕</span>
+        <input 
+          id="landingSearchInput"
+          type="text" 
+          placeholder="ShopSphere'de ara" 
+          aria-label="Ürün ara"
+        />
+      </form>
+
+      <div class="header-actions">
+        <button class="address-box" type="button">
+          <span class="action-icon">⌖</span>
+          <span>
+            <small>TESLİMAT ADRESİ</small>
+            <strong>Bursa/Nilüfer</strong>
+          </span>
+        </button>
+
+        <span class="header-divider"></span>
+
+        <a href="cart.html" class="cart-link" aria-label="Sepetim">
+          <span class="cart-icon">🛒</span>
+        </a>
+
+        <a href="login.html" class="account-box">
+          <span class="account-icon">♙</span>
+          <span>
+            <small>HESABIM</small>
+            <strong>Üye Ol&nbsp;&nbsp;Giriş Yap</strong>
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <div class="category-inner">
+
+      <a href="categoryPage.html?category=moda" class="category-item">
+        <span class="category-icon">👗</span>
+        <span>Moda</span>
+      </a>
+
+      <a href="categoryPage.html?category=elektronik" class="category-item">
+        <span class="category-icon">📱</span>
+        <span>Elektronik</span>
+      </a>
+
+      <a href="categoryPage.html?category=ev-yasam" class="category-item">
+        <span class="category-icon">💡</span>
+        <span>Ev & Yaşam</span>
+      </a>
+
+      <a href="categoryPage.html?category=anne-bebek" class="category-item">
+        <span class="category-icon">🍼</span>
+        <span>Anne & Bebek</span>
+      </a>
+
+      <a href="categoryPage.html?category=kozmetik" class="category-item">
+        <span class="category-icon">💄</span>
+        <span>Kozmetik &<br />Kişisel Bakım</span>
+      </a>
+
+      <a href="categoryPage.html?category=mucevher-saat" class="category-item">
+        <span class="category-icon">⌚</span>
+        <span>Mücevher & Saat</span>
+      </a>
+
+      <a href="categoryPage.html?category=spor-outdoor" class="category-item">
+        <span class="category-icon">🏋️</span>
+        <span>Spor & Outdoor</span>
+      </a>
+
+      <a href="categoryPage.html?category=kitap-muzik-film-oyun" class="category-item">
+        <span class="category-icon">📚</span>
+        <span>Kitap, Müzik,<br />Film, Oyun</span>
+      </a>
+
+      <a href="categoryPage.html?category=otomotiv" class="category-item">
+        <span class="category-icon">🚗</span>
+        <span>Otomotiv &<br />Motosiklet</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <section class="hero-banner">
+
+      <div class="hero-visual">
+        <div class="hero-badge">
+          <span>DİVA</span>
+          <strong>FIRSATLARI</strong>
+        </div>
+
+        <p class="hero-validity">31 Mayıs'a kadar geçerlidir.</p>
+      </div>
+
+      <div class="hero-card">
+        <p>ShopSphere Mağazasında</p>
+        <h1>%50'ye Varan Sepette İndirim</h1>
+        <a href="categoryPage.html?category=moda" class="hero-button">Şimdi Yakala →</a>
+      </div>
+
+      <div class="hero-dots" aria-label="Kampanya slider göstergeleri">
+        <button class="dot" type="button"></button>
+        <button class="dot" type="button"></button>
+        <button class="dot" type="button"></button>
+        <button class="dot" type="button"></button>
+        <button class="dot active" type="button"></button>
+        <button class="dot" type="button"></button>
+        <button class="dot" type="button"></button>
+        <button class="dot" type="button"></button>
+        <button class="dot" type="button"></button>
+        <button class="dot" type="button"></button>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    const landingSearchForm = document.getElementById("landingSearchForm");
+    const landingSearchInput = document.getElementById("landingSearchInput");
+
+    landingSearchForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const searchValue = landingSearchInput.value.trim();
+
+      if (searchValue) {
+        window.location.href = `categoryPage.html?category=elektronik&search=${encodeURIComponent(searchValue)}`;
+      } else {
+        window.location.href = "categoryPage.html?category=elektronik";
+      }
+    });
+  </script>
+
+</body>
+</html>

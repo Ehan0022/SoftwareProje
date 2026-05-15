@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopSphere | Kategori</title>
+
+  <link rel="stylesheet" href="categoryPage.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a href="landingPage.html" class="logo" aria-label="ShopSphere ana sayfa">
+        <span class="logo-mark"></span>
+      </a>
+
+      <form class="search-bar">
+        <span class="search-icon">⌕</span>
+        <input 
+          id="searchInput"
+          type="text" 
+          placeholder="ShopSphere'de ara" 
+          aria-label="Ürün ara"
+        />
+      </form>
+
+      <div class="header-actions">
+        <button class="address-box" type="button">
+          <span class="action-icon">⌖</span>
+          <span>
+            <small>TESLİMAT ADRESİ</small>
+            <strong>Bursa/Nilüfer</strong>
+          </span>
+        </button>
+
+        <span class="header-divider"></span>
+
+        <a href="cart.html" class="cart-link" aria-label="Sepetim">
+          <span class="cart-icon">🛒</span>
+        </a>
+
+        <a href="login.html" class="account-box">
+          <span class="account-icon">♙</span>
+          <span>
+            <small>HESABIM</small>
+            <strong>Üye Ol&nbsp;&nbsp;Giriş Yap</strong>
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <div class="category-inner">
+
+      <a href="categoryPage.html?category=moda" class="category-item" data-category="moda">
+        <span class="category-icon">👗</span>
+        <span>Moda</span>
+      </a>
+
+      <a href="categoryPage.html?category=elektronik" class="category-item" data-category="elektronik">
+        <span class="category-icon">📱</span>
+        <span>Elektronik</span>
+      </a>
+
+      <a href="categoryPage.html?category=ev-yasam" class="category-item" data-category="ev-yasam">
+        <span class="category-icon">💡</span>
+        <span>Ev & Yaşam</span>
+      </a>
+
+      <a href="categoryPage.html?category=anne-bebek" class="category-item" data-category="anne-bebek">
+        <span class="category-icon">🍼</span>
+        <span>Anne & Bebek</span>
+      </a>
+
+      <a href="categoryPage.html?category=kozmetik" class="category-item" data-category="kozmetik">
+        <span class="category-icon">💄</span>
+        <span>Kozmetik &<br />Kişisel Bakım</span>
+      </a>
+
+      <a href="categoryPage.html?category=mucevher-saat" class="category-item" data-category="mucevher-saat">
+        <span class="category-icon">⌚</span>
+        <span>Mücevher & Saat</span>
+      </a>
+
+      <a href="categoryPage.html?category=spor-outdoor" class="category-item" data-category="spor-outdoor">
+        <span class="category-icon">🏋️</span>
+        <span>Spor & Outdoor</span>
+      </a>
+
+      <a href="categoryPage.html?category=kitap-muzik-film-oyun" class="category-item" data-category="kitap-muzik-film-oyun">
+        <span class="category-icon">📚</span>
+        <span>Kitap, Müzik,<br />Film, Oyun</span>
+      </a>
+
+      <a href="categoryPage.html?category=otomotiv" class="category-item" data-category="otomotiv">
+        <span class="category-icon">🚗</span>
+        <span>Otomotiv &<br />Motosiklet</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <main class="category-page">
+
+    <aside class="filter-sidebar">
+      <button class="clear-filters" type="button">🗑 Filtreleri Temizle</button>
+
+      <div class="filter-box">
+        <h3>Kategori</h3>
+        <span id="sidebarCategoryName" class="filter-chip">Elektronik</span>
+      </div>
+
+      <div class="filter-box">
+        <h3>Kargo</h3>
+
+        <label class="filter-check">
+          <input type="checkbox" />
+          Ücretsiz Kargo
+        </label>
+
+        <label class="filter-check">
+          <input type="checkbox" />
+          Hızlı Kargo
+        </label>
+      </div>
+
+      <div class="filter-box">
+        <h3>Marka</h3>
+
+        <label class="filter-check">
+          <input type="checkbox" />
+          ShopTech
+        </label>
+
+        <label class="filter-check">
+          <input type="checkbox" />
+          Nova
+        </label>
+
+        <label class="filter-check">
+          <input type="checkbox" />
+          PixelPro
+        </label>
+
+        <label class="filter-check">
+          <input type="checkbox" />
+          SoundMax
+        </label>
+      </div>
+
+      <div class="filter-box">
+        <h3>Fiyat Aralığı</h3>
+
+        <div class="price-inputs">
+          <input type="number" placeholder="Min" />
+          <input type="number" placeholder="Max" />
+        </div>
+
+        <button class="filter-apply" type="button">Uygula</button>
+      </div>
+
+      <div class="filter-box">
+        <h3>Ürün Özellikleri</h3>
+
+        <button class="filter-row" type="button">
+          Renk
+          <span>⌄</span>
+        </button>
+
+        <button class="filter-row" type="button">
+          Değerlendirme
+          <span>⌄</span>
+        </button>
+
+        <button class="filter-row" type="button">
+          Stok Durumu
+          <span>⌄</span>
+        </button>
+
+        <button class="filter-row" type="button">
+          Satıcı Tipi
+          <span>⌄</span>
+        </button>
+
+        <button class="filter-row" type="button">
+          Kampanyalar
+          <span>⌄</span>
+        </button>
+      </div>
+    </aside>
+
+    <section class="products-section">
+
+      <div id="breadcrumb" class="breadcrumb">
+        Ana Sayfa / Elektronik
+      </div>
+
+      <div class="category-heading">
+        <div>
+          <h1 id="categoryTitle">Elektronik</h1>
+          <p><strong id="categoryResultName">Elektronik</strong> için sonuçları listeledik.</p>
+        </div>
+
+        <button class="sort-button" type="button">
+          ⇅ Akıllı Sıralama
+        </button>
+      </div>
+
+      <div class="quick-filters">
+        <button type="button">Çok Satanlar</button>
+        <button type="button">Yeni Gelenler</button>
+        <button type="button">Sepette İndirim</button>
+        <button type="button">Hızlı Kargo</button>
+        <button type="button">Yüksek Puanlılar</button>
+        <button type="button">Fırsat Ürünleri</button>
+      </div>
+
+      <div id="productGrid" class="product-grid"></div>
+
+      <div class="pagination">
+        <button id="prevPage" type="button">← Önceki</button>
+        <span id="pageInfo">1 / 1</span>
+        <button id="nextPage" type="button">Sonraki →</button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="categoryPage.js"></script>
+</body>
+</html>

@@ -6,6 +6,7 @@
   <title>ShopSphere | Kategori</title>
 
   <link rel="stylesheet" href="categoryPage.css" />
+  <link rel="stylesheet" href="addressModal.css" />
 </head>
 <body>
 
@@ -38,7 +39,8 @@
         <span class="header-divider"></span>
 
         <a href="cart.html" class="cart-link" aria-label="Sepetim">
-          <span class="cart-icon">🛒</span>
+        <span class="cart-icon">🛒</span>
+        <span id="cartCountBadge" class="cart-count">0</span>
         </a>
 
         <a href="login.html" class="account-box">
@@ -230,7 +232,10 @@
     </section>
 
   </main>
-
+  
+  <div id="cartToast" class="cart-toast">Ürün sepete eklendi</div>
   <script src="categoryPage.js"></script>
+  <script src="addressModal.js"></script>
+  
 </body>
 </html>

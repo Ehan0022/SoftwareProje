@@ -306,6 +306,19 @@ checkoutButton.addEventListener("click", () => {
     return;
   }
 
+  const selectedAddress =
+    typeof getSelectedAddress === "function" ? getSelectedAddress() : null;
+
+  if (!selectedAddress) {
+    checkoutMessage.textContent = "Devam etmek için teslimat adresi seçmelisin.";
+
+    if (typeof openAddressModal === "function") {
+      openAddressModal();
+    }
+
+    return;
+  }
+
   window.location.href = "checkout.html";
 });
 

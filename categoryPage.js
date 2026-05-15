@@ -1,6 +1,8 @@
 const PRODUCTS_PER_PAGE = 40;
+const CART_STORAGE_KEY = "shopsphere_cart";
 
 let currentPage = 1;
+let toastTimer = null;
 
 const categoryMap = {
   "moda": "Moda",
@@ -85,6 +87,7 @@ const brands = [
 const urlParams = new URLSearchParams(window.location.search);
 const activeCategoryKey = urlParams.get("category") || "elektronik";
 const activeCategoryName = categoryMap[activeCategoryKey] || "Elektronik";
+const searchQuery = urlParams.get("search") || "";
 
 const productNamePool =
   categoryProductNames[activeCategoryKey] || categoryProductNames["elektronik"];
@@ -94,13 +97,16 @@ const products = Array.from({ length: 96 }, (_, index) => {
   const basePrice = 699 + productNumber * 83;
 
   return {
-    id: productNumber,
+    id: `${activeCategoryKey}-${productNumber}`,
+    productNumber,
     title: `${brands[index % brands.length]} ${productNamePool[index % productNamePool.length]}`,
     oldPrice: basePrice + 450,
     price: basePrice,
     rating: (4 + ((index % 10) / 10)).toFixed(1),
     reviewCount: 24 + productNumber * 3,
-    badge: index % 3 === 0 ? "HIZLI KARGODA" : "n11'in TEKLİFİ"
+    badge: index % 3 === 0 ? "HIZLI KARGODA" : "n11'in TEKLİFİ",
+    seller: brands[index % brands.length],
+    visualClass: `visual-${productNumber % 6}`
   };
 });
 
@@ -115,6 +121,10 @@ const sidebarCategoryName = document.getElementById("sidebarCategoryName");
 const breadcrumb = document.getElementById("breadcrumb");
 const searchInput = document.getElementById("searchInput");
 
+const cartCountBadge = document.getElementById("cartCountBadge");
+const cartLink = document.querySelector(".cart-link");
+const cartToast = document.getElementById("cartToast");
+
 function initializeCategoryUI() {
   document.title = `ShopSphere | ${activeCategoryName}`;
 
@@ -122,7 +132,13 @@ function initializeCategoryUI() {
   categoryResultName.textContent = activeCategoryName;
   sidebarCategoryName.textContent = activeCategoryName;
   breadcrumb.textContent = `Ana Sayfa / ${activeCategoryName}`;
-  searchInput.placeholder = `${activeCategoryName} ürünlerinde ara`;
+
+  if (searchQuery) {
+    searchInput.value = searchQuery;
+    searchInput.placeholder = `${activeCategoryName} içinde "${searchQuery}"`;
+  } else {
+    searchInput.placeholder = `${activeCategoryName} ürünlerinde ara`;
+  }
 
   const categoryLinks = document.querySelectorAll(".category-item");
 
@@ -139,10 +155,122 @@ function formatPrice(value) {
   return value.toLocaleString("tr-TR");
 }
 
+function getCartItems() {
+  try {
+    return JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function saveCartItems(cart) {
+  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+}
+
+function getCartTotalQuantity() {
+  const cart = getCartItems();
+
+  return cart.reduce((total, item) => {
+    return total + Number(item.quantity || 0);
+  }, 0);
+}
+
+function updateCartBadge() {
+  if (!cartCountBadge) return;
+
+  const totalQuantity = getCartTotalQuantity();
+
+  if (totalQuantity > 0) {
+    cartCountBadge.textContent = totalQuantity > 99 ? "99+" : totalQuantity;
+    cartCountBadge.classList.add("visible");
+  } else {
+    cartCountBadge.textContent = "0";
+    cartCountBadge.classList.remove("visible");
+  }
+}
+
+function showCartFeedback(productTitle) {
+  if (cartToast) {
+    cartToast.textContent = `"${productTitle}" sepete eklendi`;
+    cartToast.classList.add("active");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+      cartToast.classList.remove("active");
+    }, 1700);
+  }
+
+  if (cartLink) {
+    cartLink.classList.remove("cart-bump");
+
+    requestAnimationFrame(() => {
+      cartLink.classList.add("cart-bump");
+    });
+
+    setTimeout(() => {
+      cartLink.classList.remove("cart-bump");
+    }, 450);
+  }
+}
+
+function addProductToCart(product) {
+  const cart = getCartItems();
+
+  const existingItem = cart.find((item) => {
+    return String(item.id) === String(product.id);
+  });
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+    existingItem.selected = true;
+  } else {
+    cart.push({
+      id: product.id,
+      title: product.title,
+      seller: product.seller || "ShopSphere",
+      price: product.price,
+      quantity: 1,
+      selected: true,
+      visualClass: product.visualClass || "visual-0"
+    });
+  }
+
+  saveCartItems(cart);
+  updateCartBadge();
+  showCartFeedback(product.title);
+}
+
+function getVisibleProducts() {
+  if (!searchQuery) {
+    return products;
+  }
+
+  const normalizedSearch = searchQuery.toLocaleLowerCase("tr-TR");
+
+  return products.filter((product) => {
+    return product.title.toLocaleLowerCase("tr-TR").includes(normalizedSearch);
+  });
+}
+
 function renderProducts() {
+  const visibleProductList = getVisibleProducts();
+
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
-  const visibleProducts = products.slice(startIndex, endIndex);
+  const visibleProducts = visibleProductList.slice(startIndex, endIndex);
+
+  if (visibleProducts.length === 0) {
+    productGrid.innerHTML = `
+      <div class="empty-products">
+        <h2>Ürün bulunamadı</h2>
+        <p>Arama veya filtre kriterlerini değiştirerek tekrar deneyebilirsin.</p>
+      </div>
+    `;
+
+    updatePagination();
+    return;
+  }
 
   productGrid.innerHTML = visibleProducts
     .map((product) => {
@@ -168,7 +296,15 @@ function renderProducts() {
 
             <div class="product-bottom">
               <strong class="price">${formatPrice(product.price)} TL</strong>
-              <button class="add-cart-button" type="button" aria-label="Sepete ekle">+</button>
+
+              <button 
+                class="add-cart-button" 
+                type="button" 
+                data-product-id="${product.id}"
+                aria-label="Sepete ekle"
+              >
+                +
+              </button>
             </div>
           </div>
         </article>
@@ -180,7 +316,8 @@ function renderProducts() {
 }
 
 function updatePagination() {
-  const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  const visibleProductList = getVisibleProducts();
+  const totalPages = Math.max(Math.ceil(visibleProductList.length / PRODUCTS_PER_PAGE), 1);
 
   pageInfo.textContent = `${currentPage} / ${totalPages}`;
 
@@ -197,7 +334,8 @@ prevPageButton.addEventListener("click", () => {
 });
 
 nextPageButton.addEventListener("click", () => {
-  const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  const visibleProductList = getVisibleProducts();
+  const totalPages = Math.ceil(visibleProductList.length / PRODUCTS_PER_PAGE);
 
   if (currentPage < totalPages) {
     currentPage++;
@@ -206,5 +344,30 @@ nextPageButton.addEventListener("click", () => {
   }
 });
 
+productGrid.addEventListener("click", (event) => {
+  const button = event.target.closest(".add-cart-button");
+
+  if (!button) return;
+
+  const productId = button.dataset.productId;
+
+  const product = products.find((item) => {
+    return String(item.id) === String(productId);
+  });
+
+  if (!product) return;
+
+  addProductToCart(product);
+
+  button.textContent = "✓";
+  button.classList.add("added");
+
+  setTimeout(() => {
+    button.textContent = "+";
+    button.classList.remove("added");
+  }, 900);
+});
+
 initializeCategoryUI();
+updateCartBadge();
 renderProducts();
